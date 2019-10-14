@@ -1,16 +1,18 @@
 describe('Array', () => {
   it('Should find the position of the first occurrence', () => {
     const arr1 = [1, 5, 8, 3, 2];
-    expect(/* Find 5 position*/).toBe(1);
+      expect(/* Find 5 position*/).toBe(1);
     expect(/* Find 3 position */).toBe(/* ??? */);
 
-    // TODO: Write additional its
+    // TODO: Write additional it
   });
 
   it('Should return the specified array twice', () => {
-    expect(/* double([1, 2, 3])*/).toStrictEqual([1, 2, 3, 1, 2, 3]);
+    let arr1 = [1,2,3];
+    expect(arr1.push(arr1)).toStrictEqual([1, 2, 3, 1, 2, 3]);
 
-    // TODO: Write additional its
+
+
   });
 
   it('Convert the number array to  the array of string values', () => {

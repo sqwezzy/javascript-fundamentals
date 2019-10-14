@@ -13,7 +13,10 @@ describe('Objects', () => {
   });
 
   it('Creates an object composed of the picked object properties.', () => {
-    function pick(obj, props) {}
+    function pick(obj, props) {
+      let newObject = {props};
+      return
+    }
     const object = { a: 1, b: '2', c: 3 };
 
     expect(pick(object, ['a', 'c'])).toStrictEqual({ a: 1, c: 3 });
