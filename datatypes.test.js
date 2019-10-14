@@ -80,6 +80,9 @@ describe("Data types", () => {
       expect((a * b) + c).toBe(400);
       expect((b - a) * c).toBe(2000);
       expect((c * b) + (a * b)).toBe(3300);
+      expect ((c / a) + b ).toBe(40);
+      expect(c * a * b).toBe(30000);
+      expect((b / a) * c).toBe(300)
       // TODO: write 3 own test
     });
 
