@@ -1,28 +1,37 @@
 describe('Array', () => {
   it('Should find the position of the first occurrence', () => {
     const arr1 = [1, 5, 8, 3, 2];
-      expect(/* Find 5 position*/).toBe(1);
-    expect(/* Find 3 position */).toBe(/* ??? */);
+      expect(arr1.indexOf(5)).toBe(1);
+    expect(arr1.indexOf(3)).toBe(3);
 
     // TODO: Write additional it
   });
 
   it('Should return the specified array twice', () => {
     let arr1 = [1,2,3];
-    expect(arr1.push(arr1)).toStrictEqual([1, 2, 3, 1, 2, 3]);
+    expect(arr1.concat(arr1)).toStrictEqual([1, 2, 3, 1, 2, 3]);
 
 
 
   });
 
   it('Convert the number array to  the array of string values', () => {
-    expect(/* convertToStringArr([1, 2, 3]) */).toStrictEqual(['1', '2', '3']);
-
+    function convertToStringArr(values){
+      return values.map(String);
+    }
+    expect( convertToStringArr([1, 2, 3]) ).toStrictEqual(['1', '2', '3']);
+    expect( convertToStringArr([4, 9, 18]) ).toStrictEqual(['4', '9', '18']);
+    expect( convertToStringArr([1, 2, 3, 20, 21, 45, 90]) ).toStrictEqual(['1', '2', '3', '20', '21', '45', '90']);
     // TODO: Write additional its
   });
 
   it('Should return the number of all occurrences of specified item in an array', () => {
-    expect(/* calculateOccurences([1, 2, 1, 4, 1], 1)*/).toBe(3);
+    function calculateOccurences(arr, inc){
+      let newArr = arr.filter( element => element == inc);
+      return newArr.length;
+
+    }
+    expect(calculateOccurences([1, 2, 1, 4, 1], 1)).toBe(3);
 
     // TODO: Write additional its
   });
