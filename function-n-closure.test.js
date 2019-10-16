@@ -8,6 +8,11 @@ describe('', () => {
       return x * 3;
     }
 
+    function compose(fn1,fn2){
+      return function (x) {
+        return
+      }
+    }
     expect(/* compose(  add5, mul3)(2) */).toBe(add5(mul3(2)));
   });
 
@@ -18,7 +23,9 @@ describe('', () => {
   });
 
   test('Should create function that each time return new value incremented by incrementValue and start from start', () => {
-    function createIncrementor(start, incrementValue) {}
+    function createIncrementor(start, incrementValue) {
+
+    }
     const nextFrom10By7 = createIncrementor(10, 7);
     expect(nextFrom10By7()).toBe(10);
     expect(nextFrom10By7()).toBe(17);
