@@ -1,9 +1,10 @@
 describe('Prototype', () => {
   it('Should use Function constructor without prototype', () => {
     // TODO: implement
-    function User(name) {}
-
-
+    function User(name) {
+      this.name = name;
+      this.sayHello = function sayHello(){ return `Hello, ${name}`}
+    }
 
     const user1 = new User('user1');
     const user2 = new User('user2');
@@ -17,8 +18,12 @@ describe('Prototype', () => {
 
   it('Should use prototype', () => {
     // TODO: implement
-    function User(name) {}
-
+    function User(name) {
+      this.name = name;
+    }
+    User.prototype.sayHello = function () {
+      return `Hello, ${this.name}`
+    }
 
     const user1 = new User('user1');
     const user2 = new User('user2');
@@ -32,7 +37,13 @@ describe('Prototype', () => {
 
   it('Create class ArticleList with 2 methods add and articleCount', () => {
     // TODO: implement
-    function ArticleList() {}
+    function ArticleList() {
+      this.list = [];
+      }
+      ArticleList.prototype.add = function (context) {
+        return this.list.push(this.context);
+      }
+
 
     const list1 = new ArticleList();
     const list2 = new ArticleList();
