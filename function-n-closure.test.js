@@ -12,16 +12,21 @@ describe('Function and closure', () => {
 
     function compose(fn1,fn2){
       return function (x) {
-        return
+        return fn1(fn2(x));
       }
     }
-    expect(/* compose(  add5, mul3)(2) */).toBe(add5(mul3(2)));
+    expect(compose(  add5, mul3)(2) ).toBe(add5(mul3(2)));
   });
 
   test('Should create new user with unique number identifier using increment', () => {
-    function createUser(){
-       //TODO: implement
+    function addUser (){
+      let id = 1;
+      return name => {
+        return {name, id: id++};
     }
+    }
+    const createUser = addUser();
+
     expect( createUser("Ivan") ).toStrictEqual({ name: 'Ivan', id: 1 });
     expect( createUser("Petr").name ).toBe('Petr');
     expect( createUser("Anna").id ).toBe(3);
@@ -29,8 +34,10 @@ describe('Function and closure', () => {
 
   test('Should create function that each time return new value incremented by incrementValue and start from start', () => {
     function createIncrementor(start, incrementValue) {
-
+      let count = start - incrementValue;
+      return () => count += incrementValue;
     }
+
     const nextFrom10By7 = createIncrementor(10, 7);
     expect(nextFrom10By7()).toBe(10);
     expect(nextFrom10By7()).toBe(17);
@@ -41,7 +48,7 @@ describe('Function and closure', () => {
     function solution1(from, to) {
       // TODO: fix me
       const result = [];
-      for (var i = from; i <= to; i++) {
+      for (let i = from; i <= to; i++) {
         result.push(function() {
           return i;
         });
@@ -53,8 +60,9 @@ describe('Function and closure', () => {
       // TODO: fix me
       const result = [];
       for (var i = from; i <= to; i++) {
+        const j = i;
         result.push(function() {
-          return i;
+          return j;
         });
       }
       return result;
@@ -72,6 +80,7 @@ describe('Function and closure', () => {
   test('Should works as expected. Fix me', () => {
     let a = 0;
     function foo(callback) {
+      let a = 10;
       function inner() {
         // DON"T CHANGE ME
         a++;
@@ -83,6 +92,7 @@ describe('Function and closure', () => {
       };
     }
     function getCallbackFn() {
+      let a = 0;
       return function callbackFn() {
         // DON'T change me
         a += 2;
@@ -90,8 +100,8 @@ describe('Function and closure', () => {
       };
     }
 
-    const fn1 = foo(getCallbackFn);
-    const fn2 = foo(getCallbackFn);
+    const fn1 = foo(getCallbackFn());
+    const fn2 = foo(getCallbackFn());
 
     expect(fn1.fromInner()).toBe(11);
     expect(fn2.fromInner()).toBe(11);
@@ -106,8 +116,12 @@ describe('Function and closure', () => {
   test('Should use private property', () => {
     // Function should return object with 2 methods: setValue and getValue.
     function createTestObject(){
-       // TODO: implement
-    }
+       let value ;
+       return {
+         setValue:  n_value => value = n_value,
+         getValue: () => value
+       }};
+
 
     let obj1 = createTestObject();
     let obj2 = createTestObject();
@@ -121,14 +135,18 @@ describe('Function and closure', () => {
 
   test('Should create multiply function', () => {
     function multiply(a){
-      // TODO: implement
+      return function (num) {
+        return a * num;
+      }
     }
+
     let mul5 = multiply(5);
     let mul20 = multiply(20);
 
     expect(mul5(1)).toBe(5);
     expect(mul5(7)).toBe(35);
     expect(mul20(3)).toBe(60);
+    // const multiply = n1 => n2 => n1 * n2;
   });
 
   test('Calculate function invocation', () => {
@@ -139,7 +157,13 @@ describe('Function and closure', () => {
 
     function calcCall(func) {
       // TODO: implement
-      return [func, () => 0]; // CHANGE TOO
+      let count = 0;
+      function counter() {
+        count++;
+        return func();
+      }
+      return [counter, () => count]// CHANGE TOO
+
     }
 
     const [callFn, getFnCount] = calcCall(fn);
@@ -159,7 +183,7 @@ describe('Function and closure', () => {
 
   test('Should cache the result of function with single argument', () => {
     function memoize(fn) {
-      // TODO: implement
+
     }
 
     // DON'T CHANGE.
