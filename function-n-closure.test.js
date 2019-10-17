@@ -146,7 +146,6 @@ describe('Function and closure', () => {
     expect(mul5(1)).toBe(5);
     expect(mul5(7)).toBe(35);
     expect(mul20(3)).toBe(60);
-    // const multiply = n1 => n2 => n1 * n2;
   });
 
   test('Calculate function invocation', () => {
@@ -183,7 +182,18 @@ describe('Function and closure', () => {
 
   test('Should cache the result of function with single argument', () => {
     function memoize(fn) {
-
+      let cache = {};
+      return function () {
+        let n = arguments[0];
+        if (n in cache){
+          return cache[n]
+        }
+        else {
+          let result = fn(n);
+          cache[n] = result;
+          return result;
+        }
+      }
     }
 
     // DON'T CHANGE.
@@ -221,7 +231,12 @@ describe('Function and closure', () => {
     }
 
     function logMe(fn) {
-      // TODO: implement
+      return () => {
+        logger.logStart(fn.name);
+        fn();
+        logger.logEnd(fn.name);
+        return fn.name;
+      };
     }
 
 
@@ -239,6 +254,10 @@ describe('Function and closure', () => {
     }
 
     function once(fn) {
+      return function () {
+        return callsCount ? callsCount : fn();
+
+      }
       // TODO: implement
     }
 
@@ -252,7 +271,9 @@ describe('Function and closure', () => {
 
   test('Creates a function that invokes func with partials prepended to the arguments it receives. ', () => {
     function partial(fn, arg1) {
-      // TODO: implement
+      return function (arg2) {
+        return fn(arg1,arg2);
+      }
     }
 
 
